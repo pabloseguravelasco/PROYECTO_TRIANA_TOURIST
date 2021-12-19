@@ -1,12 +1,20 @@
-package com.salesianostriana.dam.TrianaTourist.dto;
+package com.salesianostriana.dam.TrianaTourist.dto.POIDto;
 
+import com.salesianostriana.dam.TrianaTourist.dto.POIDto.CreatePOIDto;
+import com.salesianostriana.dam.TrianaTourist.dto.POIDto.GetPOIDto;
+import com.salesianostriana.dam.TrianaTourist.model.Category;
 import com.salesianostriana.dam.TrianaTourist.model.POI;
+import com.salesianostriana.dam.TrianaTourist.repository.CategoryRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
+@RequiredArgsConstructor
 public class POIDtoConverter {
+
+    private final CategoryRepository categoryRepository;
 
     public POI createPOIDtoToPOI(CreatePOIDto dto){
         return POI.builder()
@@ -15,7 +23,7 @@ public class POIDtoConverter {
                 .location(dto.getLocation())
                 .description(dto.getDescription())
                 .date(dto.getDate())
-                .category(dto.getCategory())
+                .category(categoryRepository.findById(dto.getCategory()).get())
                 .coverPhoto(dto.getCoverPhoto())
                 .photo2(dto.getPhoto2())
                 .photo3(dto.getPhoto3())
@@ -24,18 +32,11 @@ public class POIDtoConverter {
 
     public GetPOIDto POIToGetPOIDto(POI poi){
         return GetPOIDto.builder()
-                .id(poi.getId())
                 .name(poi.getName())
-                .marca(estacion.getMarca())
-                .ubicacion(estacion.getUbicacion())
-                .tieneAutolavado(estacion.isTieneAutolavado())
-                .precioGasoilNormal(estacion.getPrecioGasoilNormal())
-                .precioGasolina95Octanos(estacion.getPrecioGasolina95Octanos())
-                .precioGasoilEspecial(estacion.getPrecioGasoilEspecial())
-                .precioGasolina98(estacion.getPrecioGasolina98())
-                .servicios(estacion.getServicios())
-                .fechaApertura(estacion.getFechaApertura())
-                .fechaRegistro(LocalDateTime.now())
+                .location(poi.getLocation())
+                .date(poi.getDate())
+                .category(poi.getCategory())
+                .coverPhoto(poi.getCoverPhoto())
                 .build();
 
 

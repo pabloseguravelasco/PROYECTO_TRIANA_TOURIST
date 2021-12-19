@@ -3,10 +3,7 @@ package com.salesianostriana.dam.TrianaTourist.model;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -23,31 +20,29 @@ public class POI {
     @GeneratedValue
     private Long id;
 
-    @NotNull(message = "POI.name.null")
-    @NotBlank(message = "POI.name.blank")
+
     private String name;
-
-    @NotNull(message = "{POI.location.null}")
-    @NotBlank(message = "{POI.location.blank}")
     private String location;
-
-    @Lob
     private String description;
-
-
-    @DateTimeFormat
     private LocalDateTime date;
 
-    @NotNull(message = "POI.category.null")
-    @NotBlank(message = "POI.category.blank")
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey( name = "FK_POI_CATEGORY"))
     private Category category;
 
-    @NotNull(message = "POI.coverPhoto.null")
-    @NotBlank(message = "POI.coverPhoto.blank")
     private String coverPhoto;
-
     private String photo2;
     private String photo3;
+
+    //Métodos HELPER
+
+    public void addToRoute(Route route){
+        route.getSteps().add(this);
+    }
+    public void deleteFromRoute(Route route){
+        route.getSteps().remove(this);
+    }
 
 
 }

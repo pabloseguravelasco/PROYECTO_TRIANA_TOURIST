@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.TrianaTourist.dto;
+package com.salesianostriana.dam.TrianaTourist.dto.POIDto;
 
 
 import com.salesianostriana.dam.TrianaTourist.model.Category;
@@ -7,6 +7,8 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +20,9 @@ public class GetPOIDto {
 
     private Long id;
     private String name;
-    private String nameCategory;
+    private String location;
+    private LocalDateTime date;
+    private Category category;
     private String coverPhoto;
-    private String nameRoute;
+
 }

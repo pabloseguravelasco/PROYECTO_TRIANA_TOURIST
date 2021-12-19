@@ -1,7 +1,8 @@
-package com.salesianostriana.dam.TrianaTourist.dto;
+package com.salesianostriana.dam.TrianaTourist.dto.POIDto;
 
 
 import com.salesianostriana.dam.TrianaTourist.model.Category;
+import com.salesianostriana.dam.TrianaTourist.validacion.anotaciones.ExistLocation;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,6 +18,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
+@ExistLocation.List({
+        @ExistLocation(
+                location = "location",
+                message = "{POI.location.pattern}"
+        )
+})
+
 public class CreatePOIDto {
 
 
@@ -41,11 +50,13 @@ public class CreatePOIDto {
 
     @NotNull(message = "POI.category.null")
     @NotBlank(message = "POI.category.blank")
-    private Category category;
+    private Long category;
 
     @NotNull(message = "POI.coverPhoto.null")
     @NotBlank(message = "POI.coverPhoto.blank")
+
     private String coverPhoto;
+
 
     private String photo2;
     private String photo3;

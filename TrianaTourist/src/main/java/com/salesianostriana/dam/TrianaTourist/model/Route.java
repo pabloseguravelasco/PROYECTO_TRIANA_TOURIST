@@ -3,9 +3,8 @@ package com.salesianostriana.dam.TrianaTourist.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,5 +20,11 @@ public class Route {
     private Long id;
 
     private String name;
-    private List<POI> steps;
+
+    @ManyToMany
+    @JoinTable(name = "routes",
+            inverseJoinColumns = @JoinColumn(name = "poi_id", foreignKey = @ForeignKey(name = "FK_ROUTES_POI")),
+            joinColumns = @JoinColumn(name = "route_id",
+                    foreignKey = @ForeignKey(name = "FK_ROUTES_ROUTE")))
+    private List<POI> steps = new ArrayList<>();
 }
