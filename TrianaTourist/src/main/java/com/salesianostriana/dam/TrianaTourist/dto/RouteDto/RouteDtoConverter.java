@@ -24,7 +24,7 @@ public class RouteDtoConverter {
     public Route createRouteDtoToRoute (CreateRouteDto r){
         return Route.builder()
                 .name(r.getName())
-                .steps(r.getPoi())
+                .steps(r.getSteps())
                 .build();
     }
 

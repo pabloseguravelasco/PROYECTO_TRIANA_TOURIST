@@ -27,47 +27,60 @@ public class RouteController {
 
     @GetMapping("/")
     public ResponseEntity<List<Route>> findAll(){
+
         return ResponseEntity.ok().body(routeService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Route>> findOne(@PathVariable("id") Long id){
+
         return ResponseEntity.ok().body(routeService.findById(id));
     }
 
     @PostMapping("/")
-    public ResponseEntity<GetRouteDto> create(@Valid @RequestBody CreateRouteDto createRouteDto){
+    public ResponseEntity<GetRouteDto> createRoute(@Valid @RequestBody CreateRouteDto createRouteDto){
+
         Route route= routeDtoConverter.createRouteDtoToRoute(createRouteDto);
-        routeService.save(route);
+
+        routeService.saveRoute(route);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(routeDtoConverter.routeToGetRouteDto(route));
     }
 
-    @PostMapping("/{id}/interes/{id2}")
-    public ResponseEntity<GetRouteDto> addPoi(@Valid @PathVariable("id")Long id, @PathVariable("id2")Long id2){
+    @PostMapping("/{id}/add/{id2}")
+    public ResponseEntity<GetRouteDto> addPOItoRoute(@Valid @PathVariable("id")Long id, @PathVariable("id2")Long id2){
+
         Route route = routeService.findById(id).get();
         POI poi= poiService.findOne(id2).get();
+
         poi.addToRoute(route);
-        poiService.save(poi);
+        poiService.savePOI(poi);
+
         return ResponseEntity.ok().body(routeDtoConverter.routeToGetRouteDto(route));
     }
 
-    @DeleteMapping("/{id}/interes/{id2}")
-    public ResponseEntity<GetRouteDto> deletePoi(@Valid @PathVariable("id")Long id, @PathVariable("id2")Long id2){
+    @DeleteMapping("/{id}/delete/{id2}")
+    public ResponseEntity<GetRouteDto> deletePOI(@Valid @PathVariable("id")Long id, @PathVariable("id2")Long id2){
+
         Route route = routeService.findById(id).get();
         POI poi= poiService.findOne(id2).get();
+
         poi.deleteFromRoute(route);
-        poiService.save(poi);
+        poiService.savePOI(poi);
+
         return ResponseEntity.ok().body(routeDtoConverter.routeToGetRouteDto(route));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Route> edit(@PathVariable("id") Long id, @Valid@RequestBody CreateRouteDto createRouteDto){
-        return routeService.edit(id, createRouteDto);
+
+        return routeService.editRoute(id, createRouteDto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Long id){
-        return routeService.delete(id);
+
+        return routeService.deleteRoute(id);
     }
 
 }

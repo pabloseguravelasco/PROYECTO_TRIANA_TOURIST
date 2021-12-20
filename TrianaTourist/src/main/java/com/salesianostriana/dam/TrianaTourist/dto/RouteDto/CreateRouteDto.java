@@ -2,6 +2,7 @@ package com.salesianostriana.dam.TrianaTourist.dto.RouteDto;
 
 import com.salesianostriana.dam.TrianaTourist.model.POI;
 import com.salesianostriana.dam.TrianaTourist.validacion.anotaciones.UniqueName;
+import com.salesianostriana.dam.TrianaTourist.validacion.anotaciones.UniqueNameRoute;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -17,11 +18,11 @@ public class CreateRouteDto {
 
     private Long id;
 
-    @NotNull(message = "{category.name.null}")
-    @NotBlank(message = "{category.name.blank}")
-    @UniqueName
+    @NotNull(message = "{Route.name.null}")
+    @NotBlank(message = "{Route.name.blank}")
+    @UniqueNameRoute
     private String name;
 
-    private List<POI> poi;
+    private List<POI> steps;
 
 }

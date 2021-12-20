@@ -1,17 +1,19 @@
 package com.salesianostriana.dam.TrianaTourist.dto.POIDto;
 
 
-import com.salesianostriana.dam.TrianaTourist.model.Category;
+import com.salesianostriana.dam.TrianaTourist.validacion.anotaciones.ComparePhoto;
 import com.salesianostriana.dam.TrianaTourist.validacion.anotaciones.ExistLocation;
+import com.salesianostriana.dam.TrianaTourist.validacion.anotaciones.UniqueName;
+import com.salesianostriana.dam.TrianaTourist.validacion.anotaciones.UniqueNamePOI;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 
 @NoArgsConstructor
@@ -19,13 +21,12 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
+@ComparePhoto(coverPhoto = "coverPhoto", photo2 = "photo2", photo3 = "photo3")
 @ExistLocation.List({
         @ExistLocation(
-                location = "location",
-                message = "{POI.location.pattern}"
+                location = "location"
         )
 })
-
 public class CreatePOIDto {
 
 
@@ -35,28 +36,25 @@ public class CreatePOIDto {
 
     @NotNull(message = "POI.name.null")
     @NotBlank(message = "POI.name.blank")
+    @UniqueNamePOI
     private String name;
 
     @NotNull(message = "{POI.location.null}")
-    @NotBlank(message = "{POI.location.blank}")
     private String location;
 
     @Lob
     private String description;
 
 
-    @DateTimeFormat
-    private LocalDateTime date;
+
+    private Date date;
 
     @NotNull(message = "POI.category.null")
-    @NotBlank(message = "POI.category.blank")
     private Long category;
 
+    @URL
     @NotNull(message = "POI.coverPhoto.null")
-    @NotBlank(message = "POI.coverPhoto.blank")
-
     private String coverPhoto;
-
 
     private String photo2;
     private String photo3;

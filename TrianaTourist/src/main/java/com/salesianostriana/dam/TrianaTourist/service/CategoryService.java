@@ -27,73 +27,67 @@ public class CategoryService {
 
     public ResponseEntity<List<GetCategoryDto>> findAll() {
 
-        List<Category> data = categoryRepository.findAll();
+        List<Category> listaCategory = categoryRepository.findAll();
 
-        if (data.isEmpty()) {
+        if (listaCategory.isEmpty()) {
             throw new ListEntityNotFoundException(Category.class);
-        } else {
-
-            List<GetCategoryDto> result = data.stream().map(categoryDtoConverter::categoryToGetCategoryDto)
+        }
+            List<GetCategoryDto> result = listaCategory
+                    .stream()
+                    .map(categoryDtoConverter::categoryToGetCategoryDto)
                     .collect(Collectors.toList());
 
             return ResponseEntity.ok(result);
         }
 
-    }
 
     public ResponseEntity<List<GetCategoryDto>> findById(Long id) {
 
-        Optional<Category> data = categoryRepository.findById(id);
+        Optional<Category> category = categoryRepository.findById(id);
 
-        if (data.isEmpty()) {
+        if (category.isEmpty()) {
             throw new SingleEntityNotFoundException(Category.class, id.toString());
-        } else {
-
-            List<GetCategoryDto> result = data.stream().map(categoryDtoConverter::categoryToGetCategoryDto)
+        }
+            List<GetCategoryDto> result = category
+                    .stream()
+                    .map(categoryDtoConverter::categoryToGetCategoryDto)
                     .collect(Collectors.toList());
 
             return ResponseEntity.ok().body(result);
         }
 
+    public ResponseEntity<Category> saveCategory(CreateCategoryDto dto) {
 
+        Category nuevaCategory = categoryDtoConverter.createCategoryDtoToCategory(dto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryRepository.save(nuevaCategory));
     }
 
-    public ResponseEntity<Category> save(CreateCategoryDto category) {
+    public ResponseEntity<Category> editCategory(Long id, CreateCategoryDto dto) {
 
-        Category newCategory = categoryDtoConverter.createCategoryDtoToCategory(category);
+        Optional<Category> category = categoryRepository.findById(id);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryRepository.save(newCategory));
-    }
-
-    public ResponseEntity<Category> edit(Long id, CreateCategoryDto c) {
-
-        Optional<Category> data = categoryRepository.findById(id);
-
-        if (data.isEmpty()) {
+        if (category.isEmpty()) {
             throw new SingleEntityNotFoundException(Category.class, id.toString());
-        } else {
+        }
             return ResponseEntity.of(categoryRepository.findById(id).map(
-                    m -> {
-                        m.setName(c.getName());
-                        categoryRepository.save(m);
-                        return m;
+                    x -> {
+                        x.setName(dto.getName());
+                        categoryRepository.save(x);
+                        return x;
                     }
             ));
         }
 
+    public ResponseEntity<?> deleteCategory(Long id) {
 
-    }
+        Optional<Category> category = categoryRepository.findById(id);
 
-    public ResponseEntity<?> delete(Long id) {
-
-        Optional<Category> data = categoryRepository.findById(id);
-
-        if (data.isEmpty()) {
-            throw new SingleEntityNotFoundException( Category.class, id.toString());
-        } else {
+        if (category.isEmpty()) {
+            throw new SingleEntityNotFoundException(Category.class, id.toString());
+        }
             categoryRepository.deleteById(id);
             return ResponseEntity.status(204).build();
         }
-
     }
-}
+

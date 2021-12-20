@@ -32,11 +32,14 @@ public class POIDtoConverter {
 
     public GetPOIDto POIToGetPOIDto(POI poi){
         return GetPOIDto.builder()
+                .id(poi.getId())
                 .name(poi.getName())
                 .location(poi.getLocation())
                 .date(poi.getDate())
                 .category(poi.getCategory())
                 .coverPhoto(poi.getCoverPhoto())
+                .photo2(poi.getPhoto2())
+                .photo3(poi.getPhoto3())
                 .build();
 
 

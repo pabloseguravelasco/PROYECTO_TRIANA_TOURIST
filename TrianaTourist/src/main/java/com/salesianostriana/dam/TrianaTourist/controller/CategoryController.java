@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static org.apache.tomcat.jni.Mmap.delete;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,21 +31,21 @@ public class CategoryController {
         return categoryService.findById(id);
     }
     @PostMapping("/")
-    public ResponseEntity<Category> create(@Valid @RequestBody CreateCategoryDto createCategoryDto){
+    public ResponseEntity<Category> create(@Valid @RequestBody CreateCategoryDto dto){
 
-        return categoryService.save(createCategoryDto);
+        return categoryService.saveCategory(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> edit(@Valid @RequestBody CreateCategoryDto categoryDto, @PathVariable("id") Long id){
+    public ResponseEntity<Category> edit(@Valid @RequestBody CreateCategoryDto dto, @PathVariable("id") Long id){
 
-        return categoryService.edit(id, categoryDto);
+        return categoryService.editCategory(id, dto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Long id){
 
-        return  categoryService.delete(id);
+        return  categoryService.deleteCategory(id);
     }
 
 }

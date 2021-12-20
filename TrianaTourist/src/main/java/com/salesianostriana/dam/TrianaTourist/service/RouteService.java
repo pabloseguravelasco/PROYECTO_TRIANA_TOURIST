@@ -23,42 +23,41 @@ public class RouteService {
     public List<Route> findAll(){
         if (routeRepository.findAll().isEmpty()){
             throw new ListEntityNotFoundException(Route.class);
-        }else{
-            return routeRepository.findAll();
         }
+            return routeRepository.findAll();
+
     }
     public Optional<Route> findById(Long id){
         if (routeRepository.findById(id).isEmpty()){
             throw new SingleEntityNotFoundException(Route.class, id.toString());
-        }else {
-            return routeRepository.findById(id);
         }
+            return routeRepository.findById(id);
+
     }
 
-    public void save(Route route){
+    public void saveRoute(Route route){
+
         routeRepository.save(route);
     }
 
-    public ResponseEntity<Route> edit(Long id, CreateRouteDto c) {
+    public ResponseEntity<Route> editRoute(Long id, CreateRouteDto dto) {
 
         Optional<Route> data = routeRepository.findById(id);
 
         if (data.isEmpty()) {
             throw new SingleEntityNotFoundException(Category.class, id.toString());
-        } else {
+        }
             return ResponseEntity.of(routeRepository.findById(id).map(
-                    m -> {
-                        m.setName(c.getName());
-                        routeRepository.save(m);
-                        return m;
+                    x -> {
+                        x.setName(dto.getName());
+                        routeRepository.save(x);
+                        return x;
                     }
             ));
         }
 
 
-    }
-
-    public ResponseEntity<?> delete(Long id) {
+    public ResponseEntity<?> deleteRoute(Long id) {
 
         Optional<Route> data = routeRepository.findById(id);
 

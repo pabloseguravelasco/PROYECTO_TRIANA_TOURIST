@@ -1,0 +1,414 @@
+{
+	"info": {
+		"_postman_id": "64216af1-5de9-4122-a91b-67d9f1708d4b",
+		"name": "TrianaTourist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CATEGORY",
+			"item": [
+				{
+					"name": "LISTAR Categorías",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/category/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MOSTRAR una Categoría",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/category/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREAR Categoría",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Monumentos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/category/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDITAR Categoría",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Museos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/category/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BORRAR Categoría",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/category/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POI",
+			"item": [
+				{
+					"name": "LISTAR POI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/poi/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"poi",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MOSTRAR un POI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/poi/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"poi",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREAR POI",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Torre del Oro2\",\r\n    \"location\": \"37.382455,-5.996296\",\r\n    \"date\": \"1931-06-03\",\r\n    \"category\": 1,\r\n    \"coverPhoto\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Torre_del_Oro_flag_Seville_Spain.jpg/280px-Torre_del_Oro_flag_Seville_Spain.jpg\",\r\n    \"photo2\":\"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/SevillaTorreDelOro06.JPG/202px-SevillaTorreDelOro06.JPG\",\r\n    \"photo3\":\"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Torre_del_Oro%2C_atardecer.JPG/180px-Torre_del_Oro%2C_atardecer.JPG\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/poi/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"poi",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDITAR POI",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Colegio Salesianos Triana San Pedro\",\r\n    \"location\": \"37.3803629,-6.0097771\",\r\n    \"description\": \"El Colegio Salesianos San Pedro se encuentra en la calle Condes de Bustillo\",\r\n    \"date\": \"1988-09-29\",\r\n    \"category\": 1,\r\n    \"coverPhoto\": \"https://i.pinimg.com/236x/5f/d0/cc/5fd0cc4ad5588d2e9cdc2b87e88725bf.jpg\",\r\n    \"photo2\": \"https://fastly.4sqi.net/img/general/600x600/91430367_psQGZvQKqCuCVq_GAlJYBmDsuJyjJIIst1jpFeEZ66A.jpg\",\r\n    \"photo3\": \"https://cd1.taquilla.com/data/images/t/e2/teatro-salesianos-de-triana.jpg\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/poi/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"poi",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BORRAR POI",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/poi/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"poi",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ROUTE",
+			"item": [
+				{
+					"name": "LISTAR Rutas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/route/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MOSTRAR una Ruta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/route/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREAR Ruta sin POI",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ruta Paseo Colón\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/route/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREAR Ruta con POI",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/route/4/add/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"4",
+								"add",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDITAR Ruta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n        \"name\": \"Ruta 2\",\r\n        \"steps\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/route/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BORRAR Ruta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/route/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BORRAR POI asociado a Ruta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/route/4/delete/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"4",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

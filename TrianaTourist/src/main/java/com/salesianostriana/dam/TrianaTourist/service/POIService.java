@@ -23,57 +23,54 @@ public class POIService {
 
 
     public List<POI> findAll(){
+
         if (poiRepository.findAll().isEmpty()){
             throw new ListEntityNotFoundException(POI.class);
-        }else{
-            return poiRepository.findAll();
         }
+            return poiRepository.findAll();
     }
     public Optional<POI> findOne(Long id){
+
         if (poiRepository.findById(id).isEmpty()){
             throw new SingleEntityNotFoundException(POI.class,id.toString());
-        }else {
-            return poiRepository.findById(id);
         }
+            return poiRepository.findById(id);
     }
     public void deleteById(Long id){
         if (poiRepository.findById(id).isEmpty()){
             throw new SingleEntityNotFoundException(POI.class, id.toString());
-        }else{
-            poiRepository.deleteById(id);
         }
+            poiRepository.deleteById(id);
+
     }
 
-    public void save (POI poi){
+    public void savePOI (POI poi){
+
         poiRepository.save(poi);
     }
 
-    public ResponseEntity<POI> edit(Long id, CreatePOIDto poi) {
+    public ResponseEntity<POI> editPOI(Long id, CreatePOIDto dto) {
 
-        Optional<POI> data = poiRepository.findById(id);
+        Optional<POI> POI = poiRepository.findById(id);
 
-        if (data.isEmpty()) {
+        if (POI.isEmpty()) {
             throw new SingleEntityNotFoundException(Category.class,id.toString());
-        } else {
+        }
             return ResponseEntity.of(poiRepository.findById(id).map(
-                    m -> {
-                        m.setName(poi.getName());
-                        m.setLocation(poi.getLocation());
-                        m.setDescription(poi.getDescription());
-                        m.setDate(poi.getDate());
-                        m.setCategory(categoryRepository.findById(poi.getCategory()).get());
-                        m.setCoverPhoto(poi.getCoverPhoto());
-                        m.setPhoto2(poi.getPhoto2());
-                        m.setPhoto3(poi.getPhoto3());
-                        poiRepository.save(m);
-                        return m;
+                   x -> {
+                       x.setName(dto.getName());
+                       x.setLocation(dto.getLocation());
+                       x.setDescription(dto.getDescription());
+                       x.setDate(dto.getDate());
+                       x.setCategory(categoryRepository.findById(dto.getCategory()).get());
+                       x.setCoverPhoto(dto.getCoverPhoto());
+                       x.setPhoto2(dto.getPhoto2());
+                       x.setPhoto3(dto.getPhoto3());
+                        poiRepository.save(x);
+                        return x;
                     }
             ));
         }
 
-
     }
 
-
-
-}

@@ -41,7 +41,7 @@ public class POIController {
 
         POI poi = poiDtoConverter.createPOIDtoToPOI(dto);
 
-        poiService.save(poi);
+        poiService.savePOI(poi);
 
         GetPOIDto poiDto = poiDtoConverter.POIToGetPOIDto(poi);
 
@@ -58,7 +58,7 @@ public class POIController {
     @PutMapping("/{id}")
     public ResponseEntity<POI> edit(@PathVariable("id") Long id, @Valid @RequestBody CreatePOIDto createPOIDto){
 
-        return poiService.edit(id, createPOIDto);
+        return poiService.editPOI(id, createPOIDto);
 
 
     }
