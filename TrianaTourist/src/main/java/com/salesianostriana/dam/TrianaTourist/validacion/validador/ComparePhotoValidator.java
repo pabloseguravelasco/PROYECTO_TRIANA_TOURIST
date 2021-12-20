@@ -29,9 +29,10 @@ public class ComparePhotoValidator implements ConstraintValidator<ComparePhoto, 
 
         if (coverPhotoValue != null) {
             return !coverPhotoValue.equals(photoValue) && !coverPhotoValue.equals(photoValueMatch) && !photoValue.equals(photoValueMatch);
-        }
+        } else {
             return coverPhotoValue == null;
         }
     }
+}
 
 

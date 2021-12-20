@@ -21,10 +21,17 @@ import java.util.Date;
 @Getter
 @Setter
 @Builder
-@ComparePhoto(coverPhoto = "coverPhoto", photo2 = "photo2", photo3 = "photo3")
 @ExistLocation.List({
         @ExistLocation(
                 location = "location"
+        )
+})
+@ComparePhoto.List({
+        @ComparePhoto(
+                coverPhoto = "coverPhoto",
+                photo2 = "photo2",
+                photo3 = "photo3",
+                message = "No puede haber fotos idénticas"
         )
 })
 public class CreatePOIDto {
